@@ -1,70 +1,122 @@
-# Getting Started with Create React App
+# Portfolio - Samir Sharif
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Modern, dark-themed portfolio website showcasing projects, skills, and experience.
 
-## Available Scripts
+## Tech Stack
 
-In the project directory, you can run:
+- **React** 19.0.0 - UI framework
+- **Tailwind CSS** - Utility-first styling
+- **Shadcn UI** - Component library (Button, Card, Badge, Separator)
+- **Lucide React** - Icon library
+- **Inter Font** - Typography
 
-### `npm start`
+## Project Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+/app/frontend
+  /src
+    /components
+      /ui              # Shadcn UI components (button, card, badge, separator)
+    /sections          # Page sections
+      Header.jsx       # Sticky navigation header
+      Hero.jsx         # Hero section with intro
+      About.jsx        # Skills and strengths
+      Projects.jsx     # Project showcase
+      Experience.jsx   # Timeline of experience/education
+      Contact.jsx      # Contact information
+      Footer.jsx       # Footer with links
+    mockData.js        # All portfolio data (EDIT THIS)
+    App.js             # Main app component
+    App.css            # Custom styles
+    index.js           # Entry point
+    index.css          # Global styles & Tailwind
+  package.json
+  tailwind.config.js
+  craco.config.js
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Quick Start
 
-### `npm test`
+```bash
+# Install dependencies
+yarn install
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Start development server
+yarn start
 
-### `npm run build`
+# Build for production
+yarn build
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## How to Customize
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Update Your Information
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Edit `/src/mockData.js` to update:
 
-### `npm run eject`
+- Personal info (name, title, bio, contact)
+- Skills and strengths
+- Projects (title, description, links, tech stack)
+- Experience and education
+- Social links
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Replace Placeholder Images
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. **Profile Photo**: Replace the `avatar` URL in `mockData.js` → `personal.avatar`
+2. **Project Images**: Replace the `image` URLs in `mockData.js` → `projects[].image`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Recommended image sizes:
+- Avatar: 200x200px (circular crop)
+- Project images: 800x500px
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Color Scheme
 
-## Learn More
+The portfolio uses a dark theme with purple-blue accents:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```css
+--bg-primary: #0a0a0a       /* Black background */
+--bg-secondary: #1a1a1a     /* Dark sections */
+--accent-purple: #8b5cf6    /* Purple accent */
+--accent-blue: #6366f1      /* Blue accent */
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To change colors, edit `/src/App.css` (CSS variables) and `/src/index.css` (Tailwind theme).
 
-### Code Splitting
+## Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+✅ Fully responsive design (mobile, tablet, desktop)
+✅ Smooth scroll navigation
+✅ Sticky header with active section indicator
+✅ Mobile hamburger menu
+✅ Hover animations on cards and buttons
+✅ Project status badges (Completed/In Progress)
+✅ GitHub and Live Demo links
+✅ Social media integration
 
-### Analyzing the Bundle Size
+## Scripts
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+# Development
+yarn start          # Start dev server on port 3000
 
-### Making a Progressive Web App
+# Production
+yarn build          # Create optimized build
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+# Code Quality
+yarn lint           # Run ESLint
+```
 
-### Advanced Configuration
+## Browser Support
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
 
-### Deployment
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+MIT - Feel free to use this portfolio template for your own projects.
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Note**: This is currently a frontend-only implementation with mock data. Backend integration can be added later if needed.
