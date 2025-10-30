@@ -1,0 +1,141 @@
+.section {
+  min-height: 100vh;
+  padding: 6rem 0;
+  background: var(--bg-primary);
+  display: flex;
+  align-items: center;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.card {
+  max-width: 600px;
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  border-color: var(--accent-purple);
+  box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15);
+}
+
+/* Card header */
+.cardHeader {
+  padding: 2rem;
+  padding-bottom: 1rem;
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.75rem 0;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Card content */
+.cardContent {
+  padding: 1rem 2rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+/* Email link */
+.emailLink {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.875rem 1.5rem;
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid var(--accent-purple);
+  border-radius: 8px;
+  color: var(--accent-purple-light);
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.emailLink:hover {
+  background: rgba(139, 92, 246, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(139, 92, 246, 0.2);
+}
+
+/* Social links */
+.socialLinks {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.625rem 1.25rem;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: var(--bg-secondary);
+  border-color: var(--accent-purple);
+  transform: translateY(-2px);
+}
+
+/* Icon */
+.icon16 {
+  width: 16px;
+  height: 16px;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+  .section {
+    padding: 4rem 0;
+  }
+
+  .cardHeader,
+  .cardContent {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .socialLinks {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .button {
+    justify-content: center;
+  }
+}
