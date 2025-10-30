@@ -9,21 +9,22 @@
 }
 
 .projects-grid {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: grid !important;
+  grid-template-columns: 1fr !important;
   gap: 2rem;
   margin-top: 3rem;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
   .projects-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr !important;
   }
 }
 
 @media (min-width: 1200px) {
   .projects-grid {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr !important;
   }
 }
 
