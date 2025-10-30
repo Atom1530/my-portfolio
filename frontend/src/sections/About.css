@@ -1,4 +1,4 @@
-/* About Section Styles */
+/* About Section */
 .about-section {
   background: var(--bg-secondary);
   padding: 6rem 2rem;
@@ -22,13 +22,14 @@
 .about-card {
   background: var(--bg-card);
   border-color: var(--border-color);
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  transition: all 0.3s ease;
   height: 100%;
 }
 
 .about-card:hover {
   transform: translateY(-4px);
   border-color: var(--accent-purple);
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.15);
 }
 
 .card-title {
@@ -45,70 +46,47 @@
   color: var(--accent-blue);
 }
 
-/* Strengths Grid */
-.strengths-grid {
+/* Badges Grid */
+.badges-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
 }
 
+/* Strength Badges */
 .strength-badge {
-  background: rgba(139, 92, 246, 0.1);
+  background: rgba(139, 92, 246, 0.15);
   color: var(--accent-purple-light);
   border: 1px solid rgba(139, 92, 246, 0.3);
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
+  font-weight: 500;
   transition: all 0.2s ease;
+  cursor: default;
 }
 
 .strength-badge:hover {
-  background: rgba(139, 92, 246, 0.2);
+  background: rgba(139, 92, 246, 0.25);
+  border-color: var(--accent-purple);
   transform: translateY(-2px);
 }
 
-/* Skills Progress */
-.skills-progress-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.skill-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.skill-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.skill-name {
-  color: var(--text-primary);
+/* Skill Badges */
+.skill-badge {
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--accent-blue-light);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
   font-weight: 500;
-  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  cursor: default;
 }
 
-.skill-level {
-  color: var(--accent-purple);
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-
-.skill-bar {
-  height: 8px;
-  background: rgba(139, 92, 246, 0.1);
-  border-radius: 9999px;
-  overflow: hidden;
-}
-
-.skill-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
-  border-radius: 9999px;
-  box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+.skill-badge:hover {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: var(--accent-blue);
+  transform: translateY(-2px);
 }
 
 /* Responsive */
@@ -121,7 +99,13 @@
     grid-template-columns: 1fr;
   }
   
-  .skill-bar {
-    height: 6px;
+  .badges-grid {
+    gap: 0.5rem;
+  }
+  
+  .strength-badge,
+  .skill-badge {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
   }
 }
