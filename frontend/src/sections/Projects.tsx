@@ -69,9 +69,10 @@ export const Projects: React.FC<ProjectsProps> = ({ data }) => {
                 transition: { duration: 0.3 }
               }}
             >
-              <Card className="project-card">
-                {/* Image Slider */}
-                <div className="project-slider-container">
+              <div>
+                <Card className="project-card">
+                  {/* Image Slider */}
+                  <div className="project-slider-container">
                   <Swiper
                     modules={[Autoplay, Pagination, Navigation]}
                     spaceBetween={0}
