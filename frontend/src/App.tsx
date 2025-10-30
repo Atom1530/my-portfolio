@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Header } from './components/Header/Header';
+import { HeroSection } from './components/HeroSection/HeroSection';
+import { AboutSection } from './components/AboutSection/AboutSection';
 import { portfolioData } from './data';
-import styles from './App.module.css';
 
 export const App = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -35,50 +36,41 @@ export const App = () => {
   };
 
   return (
-    <div className={styles.app}>
+    <div>
       <Header
         activeSection={activeSection}
         onNavigate={scrollToSection}
         personalName={portfolioData.personal.name}
       />
-
-      {/* Hero Section Placeholder */}
-      <section id="home" className={styles.section}>
+      
+      <HeroSection 
+        data={portfolioData.personal} 
+        onNavigate={scrollToSection}
+      />
+      
+      <AboutSection data={portfolioData} />
+      
+      {/* Projects - Coming soon */}
+      <section id="projects" style={{ minHeight: '100vh', padding: '6rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div className="section-container">
-          <h1>Hero Section</h1>
-          <p>Portfolio for {portfolioData.personal.name}</p>
+          <h2 className="section-title">Projects</h2>
+          <p style={{ color: 'var(--text-secondary)' }}>Projects section with Swiper - adding now...</p>
         </div>
       </section>
-
-      {/* About Section Placeholder */}
-      <section id="about" className={styles.section}>
+      
+      {/* Experience */}
+      <section id="experience" style={{ minHeight: '100vh', padding: '6rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-secondary)' }}>
         <div className="section-container">
-          <h2>About Me</h2>
-          <p>{portfolioData.skills.length} skills</p>
+          <h2 className="section-title">Experience</h2>
+          <p style={{ color: 'var(--text-secondary)' }}>Experience timeline - adding now...</p>
         </div>
       </section>
-
-      {/* Projects Section Placeholder */}
-      <section id="projects" className={styles.section}>
+      
+      {/* Contact */}
+      <section id="contact" style={{ minHeight: '100vh', padding: '6rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div className="section-container">
-          <h2>Projects</h2>
-          <p>{portfolioData.projects.length} projects</p>
-        </div>
-      </section>
-
-      {/* Experience Section Placeholder */}
-      <section id="experience" className={styles.section}>
-        <div className="section-container">
-          <h2>Experience</h2>
-          <p>{portfolioData.experience.length} experiences</p>
-        </div>
-      </section>
-
-      {/* Contact Section Placeholder */}
-      <section id="contact" className={styles.section}>
-        <div className="section-container">
-          <h2>Contact</h2>
-          <p>{portfolioData.personal.email}</p>
+          <h2 className="section-title">Contact</h2>
+          <p style={{ color: 'var(--text-secondary)' }}>{portfolioData.personal.email}</p>
         </div>
       </section>
     </div>
