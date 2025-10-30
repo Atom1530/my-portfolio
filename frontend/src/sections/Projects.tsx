@@ -4,11 +4,10 @@ import { Badge } from "../components/ui/badge";
 import { Button } from "../components/ui/button";
 import { Briefcase, Github, ExternalLink } from "lucide-react";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
 import { PortfolioData } from "../types/portfolio";
 import 'swiper/css';
 import 'swiper/css/pagination';
-import 'swiper/css/navigation';
 import "./Projects.css";
 
 interface ProjectsProps {
@@ -19,6 +18,7 @@ export const Projects: React.FC<ProjectsProps> = ({ data }) => {
   return (
     <section id="projects" className="projects-section">
       <div className="section-container">
+        {/* Section Header */}
         <motion.div 
           className="section-header"
           initial={{ opacity: 0, y: -20 }}
@@ -30,51 +30,41 @@ export const Projects: React.FC<ProjectsProps> = ({ data }) => {
           <h2 className="section-title">Projects</h2>
         </motion.div>
 
+        {/* Projects Grid */}
         <div className="projects-grid">
           {data.projects.map((project, index) => (
             <motion.div
               key={project.id}
-              initial={{ y: 50, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{
-                delay: index * 0.2,
-                type: "spring",
-                stiffness: 100,
-                damping: 12,
-              }}
-              whileHover={{ 
-                y: -10,
-                transition: { duration: 0.3 }
-              }}
+              className="project-wrapper"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: index * 0.15, duration: 0.5 }}
             >
               <Card className="project-card">
                 {/* Image Slider */}
-                <div className="project-slider-container">
+                <div className="slider-wrapper">
                   <Swiper
-                    modules={[Autoplay, Pagination, Navigation]}
+                    modules={[Autoplay, Pagination]}
                     spaceBetween={0}
                     slidesPerView={1}
                     autoplay={{
-                      delay: 3000,
+                      delay: 3500,
                       disableOnInteraction: false,
-                      pauseOnMouseEnter: true,
                     }}
                     pagination={{
                       clickable: true,
                       dynamicBullets: true,
                     }}
-                    navigation={true}
-                    loop={true}
-                    className="project-swiper"
+                    loop={project.images.length > 1}
+                    className="project-slider"
                   >
-                    {project.images.map((image, idx) => (
-                      <SwiperSlide key={idx}>
-                        <div className="project-image-wrapper">
+                    {project.images.map((image, imgIndex) => (
+                      <SwiperSlide key={imgIndex}>
+                        <div className="slide-image">
                           <img 
                             src={image} 
-                            alt={`${project.title} - Screenshot ${idx + 1}`}
-                            className="project-image"
+                            alt={`${project.title} screenshot ${imgIndex + 1}`}
                             loading="lazy"
                           />
                         </div>
@@ -83,28 +73,33 @@ export const Projects: React.FC<ProjectsProps> = ({ data }) => {
                   </Swiper>
                   
                   {/* Status Badge */}
-                  <div className="project-status">
-                    <Badge 
-                      variant={project.status === "completed" ? "default" : "secondary"}
-                      className="status-badge"
-                    >
-                      {project.status === "completed" ? "Completed" : 
-                       project.status === "in-progress" ? "In Progress" : "In Development"}
+                  <div className="status-badge-wrapper">
+                    <Badge className="status-badge">
+                      {project.status === "completed" ? "✓ Completed" : 
+                       project.status === "in-progress" ? "⚙ In Progress" : "🔨 In Development"}
                     </Badge>
                   </div>
                 </div>
 
+                {/* Project Info */}
                 <CardHeader>
-                  <CardTitle className="project-title">{project.title}</CardTitle>
+                  <CardTitle className="project-title">
+                    {project.title}
+                  </CardTitle>
                   <CardDescription className="project-description">
                     {project.description}
                   </CardDescription>
                 </CardHeader>
 
-                <CardContent>
-                  <div className="project-tech">
-                    {project.technologies.map((tech, techIdx) => (
-                      <Badge key={techIdx} variant="outline" className="tech-badge">
+                {/* Technologies & Links */}
+                <CardContent className="project-footer">
+                  <div className="tech-tags">
+                    {project.technologies.map((tech, techIndex) => (
+                      <Badge 
+                        key={techIndex} 
+                        variant="outline" 
+                        className="tech-tag"
+                      >
                         {tech}
                       </Badge>
                     ))}
@@ -117,7 +112,11 @@ export const Projects: React.FC<ProjectsProps> = ({ data }) => {
                         target="_blank" 
                         rel="noopener noreferrer"
                       >
-                        <Button variant="outline" size="sm" className="project-link-btn">
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="link-button"
+                        >
                           <Github className="h-4 w-4 mr-2" />
                           GitHub
                         </Button>
@@ -129,7 +128,10 @@ export const Projects: React.FC<ProjectsProps> = ({ data }) => {
                         target="_blank" 
                         rel="noopener noreferrer"
                       >
-                        <Button size="sm" className="project-link-btn-primary">
+                        <Button 
+                          size="sm" 
+                          className="link-button-primary"
+                        >
                           <ExternalLink className="h-4 w-4 mr-2" />
                           Live Demo
                         </Button>
