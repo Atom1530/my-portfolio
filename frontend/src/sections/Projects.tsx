@@ -175,7 +175,8 @@ export const Projects: React.FC<ProjectsProps> = ({ data }) => {
                     )}
                   </div>
                 </CardContent>
-              </Card>
+                </Card>
+              </div>
             </motion.div>
           ))}
         </motion.div>
