@@ -59,6 +59,11 @@ export const Projects: React.FC<ProjectsProps> = ({ data }) => {
             <motion.div
               key={project.id}
               variants={itemVariants}
+              transition={{
+                type: "spring",
+                stiffness: 100,
+                damping: 12,
+              }}
               whileHover={{ 
                 y: -10,
                 transition: { duration: 0.3 }
