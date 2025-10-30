@@ -1,0 +1,168 @@
+/* Projects Section Enhanced Styles */
+.project-slider-container {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  background: var(--bg-secondary);
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.project-swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.project-image-wrapper {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  cursor: grab;
+}
+
+.project-image-wrapper:active {
+  cursor: grabbing;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+/* Swiper Navigation Buttons */
+.project-swiper .swiper-button-prev,
+.project-swiper .swiper-button-next {
+  width: 40px;
+  height: 40px;
+  background: rgba(10, 10, 10, 0.8);
+  border-radius: 50%;
+  backdrop-filter: blur(8px);
+  color: var(--accent-purple);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-swiper .swiper-button-prev::after,
+.project-swiper .swiper-button-next::after {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.project-card:hover .swiper-button-prev,
+.project-card:hover .swiper-button-next {
+  opacity: 1;
+}
+
+.project-swiper .swiper-button-prev:hover,
+.project-swiper .swiper-button-next:hover {
+  background: rgba(139, 92, 246, 0.9);
+  color: white;
+}
+
+/* Swiper Pagination */
+.project-swiper .swiper-pagination {
+  bottom: 10px;
+}
+
+.project-swiper .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.project-swiper .swiper-pagination-bullet-active {
+  width: 24px;
+  border-radius: 4px;
+  background: var(--accent-purple);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+}
+
+/* Status Badge */
+.project-status {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+}
+
+.status-badge {
+  backdrop-filter: blur(8px);
+  background: rgba(10, 10, 10, 0.8);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Enhanced Project Card */
+.project-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(139, 92, 246, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.project-card:hover::before {
+  left: 100%;
+}
+
+.project-card:hover {
+  box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+  border-color: var(--accent-purple);
+}
+
+/* Tech Badge Animation */
+.tech-badge {
+  transition: all 0.2s ease;
+}
+
+.tech-badge:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-purple);
+  color: var(--accent-purple);
+  box-shadow: 0 4px 8px rgba(139, 92, 246, 0.2);
+}
+
+/* Project Links */
+.project-links {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+  .project-slider-container {
+    height: 200px;
+  }
+  
+  .project-image-wrapper {
+    height: 200px;
+  }
+  
+  .project-swiper .swiper-button-prev,
+  .project-swiper .swiper-button-next {
+    display: none;
+  }
+}
