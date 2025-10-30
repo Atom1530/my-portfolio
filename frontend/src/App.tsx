@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import { Header } from './components/Header/Header';
 import { HeroSection } from './components/HeroSection/HeroSection';
 import { AboutSection } from './components/AboutSection/AboutSection';
+import { ProjectsSection } from './components/ProjectsSection/ProjectsSection';
+import { ExperienceSection } from './components/ExperienceSection/ExperienceSection';
+import { ContactSection } from './components/ContactSection/ContactSection';
+import { Footer } from './components/Footer/Footer';
 import { portfolioData } from './data';
 
 export const App = () => {
@@ -43,36 +47,22 @@ export const App = () => {
         personalName={portfolioData.personal.name}
       />
       
-      <HeroSection 
-        data={portfolioData.personal} 
-        onNavigate={scrollToSection}
-      />
-      
-      <AboutSection data={portfolioData} />
-      
-      {/* Projects - Coming soon */}
-      <section id="projects" style={{ minHeight: '100vh', padding: '6rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div className="section-container">
-          <h2 className="section-title">Projects</h2>
-          <p style={{ color: 'var(--text-secondary)' }}>Projects section with Swiper - adding now...</p>
-        </div>
-      </section>
-      
-      {/* Experience */}
-      <section id="experience" style={{ minHeight: '100vh', padding: '6rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-secondary)' }}>
-        <div className="section-container">
-          <h2 className="section-title">Experience</h2>
-          <p style={{ color: 'var(--text-secondary)' }}>Experience timeline - adding now...</p>
-        </div>
-      </section>
-      
-      {/* Contact */}
-      <section id="contact" style={{ minHeight: '100vh', padding: '6rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div className="section-container">
-          <h2 className="section-title">Contact</h2>
-          <p style={{ color: 'var(--text-secondary)' }}>{portfolioData.personal.email}</p>
-        </div>
-      </section>
+      <main>
+        <HeroSection 
+          data={portfolioData.personal} 
+          onNavigate={scrollToSection}
+        />
+        
+        <AboutSection data={portfolioData} />
+        
+        <ProjectsSection />
+        
+        <ExperienceSection />
+        
+        <ContactSection />
+      </main>
+
+      <Footer />
     </div>
   );
 };
