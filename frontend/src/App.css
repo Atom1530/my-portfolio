@@ -369,20 +369,28 @@ body {
 
 /* Projects Section */
 .projects-grid {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-wrap: wrap;
   gap: 2rem;
+  justify-content: center;
+}
+
+.projects-grid > * {
+  flex: 1 1 100%;
+  max-width: 100%;
 }
 
 @media (min-width: 768px) {
-  .projects-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .projects-grid > * {
+    flex: 1 1 calc(50% - 1rem);
+    max-width: calc(50% - 1rem);
   }
 }
 
 @media (min-width: 1024px) {
-  .projects-grid {
-    grid-template-columns: repeat(3, 1fr);
+  .projects-grid > * {
+    flex: 1 1 calc(33.333% - 1.5rem);
+    max-width: calc(33.333% - 1.5rem);
   }
 }
 
