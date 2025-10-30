@@ -1,20 +1,14 @@
-import { useEffect, useState } from "react";
-import "./App.css";
-import { portfolioData } from "./mockData";
-import { Header } from "./sections/Header";
-import { Hero } from "./sections/Hero";
-import { About } from "./sections/About";
-import { Projects } from "./sections/Projects";
-import { Experience } from "./sections/Experience";
-import { Contact } from "./sections/Contact";
-import { Footer } from "./sections/Footer";
+import { useEffect, useState } from 'react';
+import { Header } from './components/Header/Header';
+import { portfolioData } from './data';
+import styles from './App.module.css';
 
-function App() {
-  const [activeSection, setActiveSection] = useState("home");
+export const App = () => {
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["home", "about", "projects", "experience", "contact"];
+      const sections = ['home', 'about', 'projects', 'experience', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -29,37 +23,64 @@ function App() {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
-    <div className="App">
-      <div className="portfolio-container">
-        <Header 
-          activeSection={activeSection} 
-          scrollToSection={scrollToSection} 
-          personalName={portfolioData.personal.name}
-        />
-        <Hero data={portfolioData} scrollToSection={scrollToSection} />
-        <About data={portfolioData} />
-        <Projects data={portfolioData} />
-        <Experience data={portfolioData} />
-        <Contact data={portfolioData} />
-        <Footer 
-          personalName={portfolioData.personal.name} 
-          githubUrl={portfolioData.social.github}
-        />
-      </div>
+    <div className={styles.app}>
+      <Header
+        activeSection={activeSection}
+        onNavigate={scrollToSection}
+        personalName={portfolioData.personal.name}
+      />
+
+      {/* Hero Section Placeholder */}
+      <section id="home" className={styles.section}>
+        <div className="section-container">
+          <h1>Hero Section</h1>
+          <p>Portfolio for {portfolioData.personal.name}</p>
+        </div>
+      </section>
+
+      {/* About Section Placeholder */}
+      <section id="about" className={styles.section}>
+        <div className="section-container">
+          <h2>About Me</h2>
+          <p>{portfolioData.skills.length} skills</p>
+        </div>
+      </section>
+
+      {/* Projects Section Placeholder */}
+      <section id="projects" className={styles.section}>
+        <div className="section-container">
+          <h2>Projects</h2>
+          <p>{portfolioData.projects.length} projects</p>
+        </div>
+      </section>
+
+      {/* Experience Section Placeholder */}
+      <section id="experience" className={styles.section}>
+        <div className="section-container">
+          <h2>Experience</h2>
+          <p>{portfolioData.experience.length} experiences</p>
+        </div>
+      </section>
+
+      {/* Contact Section Placeholder */}
+      <section id="contact" className={styles.section}>
+        <div className="section-container">
+          <h2>Contact</h2>
+          <p>{portfolioData.personal.email}</p>
+        </div>
+      </section>
     </div>
   );
-}
-
-export default App;
+};
