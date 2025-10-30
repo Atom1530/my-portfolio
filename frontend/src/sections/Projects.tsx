@@ -8,7 +8,6 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import { PortfolioData } from "../types/portfolio";
 import 'swiper/css';
 import 'swiper/css/pagination';
-import "./Projects.css";
 
 interface ProjectsProps {
   data: PortfolioData;
