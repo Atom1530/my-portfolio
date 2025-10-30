@@ -33,100 +33,44 @@ export const Contact: React.FC<ContactProps> = ({ data }) => {
         >
           <Card className="contact-card">
             <CardContent className="contact-content">
-              <motion.p 
-                className="contact-text"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-              >
+              <p className="contact-text">
                 I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
-              </motion.p>
+              </p>
               
               <Separator className="contact-separator" />
 
-              <motion.div 
-                className="contact-info"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-              >
-                <motion.div 
-                  className="contact-item"
-                  whileHover={{ 
-                    x: 10,
-                    transition: { duration: 0.2 }
-                  }}
-                >
-                  <motion.div
-                    animate={{ 
-                      rotate: [0, 10, -10, 0],
-                      scale: [1, 1.1, 1]
-                    }}
-                    transition={{ 
-                      duration: 2,
-                      repeat: Infinity,
-                      repeatDelay: 3
-                    }}
-                  >
-                    <Mail className="contact-icon" />
-                  </motion.div>
+              <div className="contact-info">
+                <div className="contact-item">
+                  <Mail className="contact-icon" />
                   <span>{data.personal.email}</span>
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                  <Button 
+                    size="sm" 
+                    className="send-btn"
+                    onClick={() => window.location.href = `mailto:${data.personal.email}`}
                   >
-                    <Button 
-                      size="sm" 
-                      className="send-btn"
-                      onClick={() => window.location.href = `mailto:${data.personal.email}`}
-                    >
-                      <Send className="h-4 w-4 mr-2" />
-                      Send Email
-                    </Button>
-                  </motion.div>
-                </motion.div>
-              </motion.div>
+                    <Send className="h-4 w-4 mr-2" />
+                    Send Email
+                  </Button>
+                </div>
+              </div>
 
-              <motion.div 
-                className="social-links"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
-              >
-                {[
-                  { href: data.social.github, Icon: Github, label: "GitHub" },
-                  { href: data.social.linkedin, Icon: Linkedin, label: "LinkedIn" },
-                  { href: data.social.twitter, Icon: Twitter, label: "Twitter" },
-                ].map((social, index) => (
-                  <motion.a 
-                    key={social.label}
-                    href={social.href} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    initial={{ scale: 0, rotate: -180 }}
-                    whileInView={{ scale: 1, rotate: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ 
-                      delay: 0.6 + index * 0.1,
-                      type: "spring",
-                      stiffness: 200
-                    }}
-                    whileHover={{ 
-                      scale: 1.2,
-                      rotate: 5,
-                      transition: { duration: 0.2 }
-                    }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    <Button variant="outline" size="icon" className="social-btn">
-                      <social.Icon className="h-5 w-5" />
-                    </Button>
-                  </motion.a>
-                ))}
-              </motion.div>
+              <div className="social-links">
+                <a href={data.social.github} target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" size="icon" className="social-btn">
+                    <Github className="h-5 w-5" />
+                  </Button>
+                </a>
+                <a href={data.social.linkedin} target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" size="icon" className="social-btn">
+                    <Linkedin className="h-5 w-5" />
+                  </Button>
+                </a>
+                <a href={data.social.twitter} target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" size="icon" className="social-btn">
+                    <Twitter className="h-5 w-5" />
+                  </Button>
+                </a>
+              </div>
             </CardContent>
           </Card>
         </motion.div>

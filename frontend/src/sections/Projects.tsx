@@ -15,24 +15,6 @@ interface ProjectsProps {
   data: PortfolioData;
 }
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { y: 50, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-  },
-};
-
 export const Projects: React.FC<ProjectsProps> = ({ data }) => {
   return (
     <section id="projects" className="projects-section">
@@ -48,18 +30,15 @@ export const Projects: React.FC<ProjectsProps> = ({ data }) => {
           <h2 className="section-title">Projects</h2>
         </motion.div>
 
-        <motion.div 
-          className="projects-grid"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          {data.projects.map((project) => (
+        <div className="projects-grid">
+          {data.projects.map((project, index) => (
             <motion.div
               key={project.id}
-              variants={itemVariants}
+              initial={{ y: 50, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
               transition={{
+                delay: index * 0.2,
                 type: "spring",
                 stiffness: 100,
                 damping: 12,
@@ -69,10 +48,9 @@ export const Projects: React.FC<ProjectsProps> = ({ data }) => {
                 transition: { duration: 0.3 }
               }}
             >
-              <div>
-                <Card className="project-card">
-                  {/* Image Slider */}
-                  <div className="project-slider-container">
+              <Card className="project-card">
+                {/* Image Slider */}
+                <div className="project-slider-container">
                   <Swiper
                     modules={[Autoplay, Pagination, Navigation]}
                     spaceBetween={0}
@@ -90,20 +68,16 @@ export const Projects: React.FC<ProjectsProps> = ({ data }) => {
                     loop={true}
                     className="project-swiper"
                   >
-                    {project.images.map((image, index) => (
-                      <SwiperSlide key={index}>
-                        <motion.div 
-                          className="project-image-wrapper"
-                          whileHover={{ scale: 1.05 }}
-                          transition={{ duration: 0.3 }}
-                        >
+                    {project.images.map((image, idx) => (
+                      <SwiperSlide key={idx}>
+                        <div className="project-image-wrapper">
                           <img 
                             src={image} 
-                            alt={`${project.title} - Screenshot ${index + 1}`}
+                            alt={`${project.title} - Screenshot ${idx + 1}`}
                             className="project-image"
                             loading="lazy"
                           />
-                        </motion.div>
+                        </div>
                       </SwiperSlide>
                     ))}
                   </Swiper>
@@ -129,57 +103,44 @@ export const Projects: React.FC<ProjectsProps> = ({ data }) => {
 
                 <CardContent>
                   <div className="project-tech">
-                    {project.technologies.map((tech, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ scale: 0 }}
-                        whileInView={{ scale: 1 }}
-                        transition={{ delay: index * 0.05 }}
-                        viewport={{ once: true }}
-                      >
-                        <Badge variant="outline" className="tech-badge">
-                          {tech}
-                        </Badge>
-                      </motion.div>
+                    {project.technologies.map((tech, techIdx) => (
+                      <Badge key={techIdx} variant="outline" className="tech-badge">
+                        {tech}
+                      </Badge>
                     ))}
                   </div>
 
                   <div className="project-links">
                     {project.github !== "#" && (
-                      <motion.a 
+                      <a 
                         href={project.github} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
                       >
                         <Button variant="outline" size="sm" className="project-link-btn">
                           <Github className="h-4 w-4 mr-2" />
                           GitHub
                         </Button>
-                      </motion.a>
+                      </a>
                     )}
                     {project.live !== "#" && (
-                      <motion.a 
+                      <a 
                         href={project.live} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
                       >
                         <Button size="sm" className="project-link-btn-primary">
                           <ExternalLink className="h-4 w-4 mr-2" />
                           Live Demo
                         </Button>
-                      </motion.a>
+                      </a>
                     )}
                   </div>
                 </CardContent>
-                </Card>
-              </div>
+              </Card>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -37,72 +37,34 @@ export const Experience: React.FC<ExperienceProps> = ({ data }) => {
                 type: "spring",
                 stiffness: 100
               }}
+              whileHover={{ 
+                x: 12,
+                transition: { duration: 0.3 }
+              }}
             >
-              <motion.div
-                whileHover={{ 
-                  x: 12,
-                  transition: { duration: 0.3 }
-                }}
-              >
-                <Card className="timeline-card">
-                  {/* Timeline Dot */}
-                  <motion.div 
-                    className="timeline-dot"
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.2 + 0.3, type: "spring" }}
-                  >
-                    <motion.div
-                      className="timeline-dot-inner"
-                      animate={{
-                        scale: [1, 1.3, 1],
-                        opacity: [0.5, 1, 0.5],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: index * 0.5,
-                      }}
-                    />
-                  </motion.div>
+              <Card className="timeline-card">
+                {/* Timeline Dot */}
+                <div className="timeline-dot">
+                  <div className="timeline-dot-inner" />
+                </div>
 
-                  <CardHeader>
-                    <div className="timeline-header">
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.2 + 0.4 }}
-                      >
-                        <CardTitle className="timeline-title">{item.title}</CardTitle>
-                        <p className="timeline-organization">{item.organization}</p>
-                      </motion.div>
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.2 + 0.5 }}
-                      >
-                        <Badge variant="secondary" className="timeline-period">
-                          {item.period}
-                        </Badge>
-                      </motion.div>
+                <CardHeader>
+                  <div className="timeline-header">
+                    <div>
+                      <CardTitle className="timeline-title">{item.title}</CardTitle>
+                      <p className="timeline-organization">{item.organization}</p>
                     </div>
-                  </CardHeader>
-                  <CardContent>
-                    <motion.p 
-                      className="timeline-description"
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.2 + 0.6 }}
-                    >
-                      {item.description}
-                    </motion.p>
-                  </CardContent>
-                </Card>
-              </motion.div>
+                    <Badge variant="secondary" className="timeline-period">
+                      {item.period}
+                    </Badge>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="timeline-description">
+                    {item.description}
+                  </p>
+                </CardContent>
+              </Card>
             </motion.div>
           ))}
         </div>
