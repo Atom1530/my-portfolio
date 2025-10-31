@@ -6,7 +6,7 @@ export default defineConfig({
   resolve: {
     alias: { "@": "/src" },
   },
-  base: "/Atom1530/",
+  base: "/my-portfolio/",
   server: {
     port: 3000,
   },

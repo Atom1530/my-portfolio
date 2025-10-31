@@ -1,5 +1,8 @@
 import { PortfolioData } from "./types/portfolio";
 
+const withBase = (p: string) =>
+  `${import.meta.env.BASE_URL}${p.replace(/^\/+/, "")}`;
+
 export const portfolioData: PortfolioData = {
   personal: {
     name: "Samir Sharif",
@@ -18,7 +21,7 @@ export const portfolioData: PortfolioData = {
     email: "samirsharif6969@gmail.com",
     phone: "+1 (470) 861-4937",
     location: "GA Atlanta",
-    avatar: "/images/avatar/samir-sharif.jpg",
+    avatar: withBase("images/avatar/samir-sharif.jpg"),
   },
 
   skills: [
@@ -43,9 +46,9 @@ export const portfolioData: PortfolioData = {
       description:
         "ArtistHub helps you find new artists and listen without leaving the site. Each track links to YouTube but plays inline via an embedded player. The project includes an artist list, per-artist pages, and a fully responsive UI.",
       images: [
-        "/images/projects/project-1-1.png",
-        "/images/projects/project-1-2.png",
-        "/images/projects/project-1-3.png",
+        withBase("images/projects/project-1-1.png"),
+        withBase("images/projects/project-1-2.png"),
+        withBase("images/projects/project-1-3.png"),
       ],
       technologies: ["HTML5", "CSS3", "JavaScript", "Team Lead"],
       github: "https://github.com/Atom1530/ForceTech7-Website2",
@@ -58,11 +61,11 @@ export const portfolioData: PortfolioData = {
       description:
         "A Phaser 3 fishing game with a full progression loop: cast → control tension → land the catch → sell → upgrade. Quests guide early goals, tournaments push skill checks, and new locations unlock with better rods, lines, and lures. Features in-game shop, readable HUD, and responsive UI.",
       images: [
-        "/images/projects/project-2-1.png",
-        "/images/projects/project-2-2.png",
-        "/images/projects/project-2-3.png",
-        "/images/projects/project-2-4.png",
-        "/images/projects/project-2-5.png",
+        withBase("images/projects/project-2-1.png"),
+        withBase("images/projects/project-2-2.png"),
+        withBase("images/projects/project-2-3.png"),
+        withBase("images/projects/project-2-4.png"),
+        withBase("images/projects/project-2-5.png"),
       ],
       technologies: ["Phaser 3", "JavaScript", "Game Dev"],
       github: "#",
@@ -77,10 +80,10 @@ export const portfolioData: PortfolioData = {
         "A clean note-taking app for ideas, tasks, and quick drafts. Create, edit, and delete notes; tag them for context and find anything fast with search.",
 
       images: [
-        "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=500&fit=crop",
-        "https://images.unsplash.com/photo-1512758017271-d7b84c2113f1?w=800&h=500&fit=crop",
-        "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&h=500&fit=crop",
-        "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&h=500&fit=crop",
+        withBase("images/projects/project-4-1.jpg"),
+        withBase("images/projects/project-4-2.png"),
+        withBase("images/projects/project-4-3.png"),
+        withBase("images/projects/project-4-4.png"),
       ],
       technologies: ["Next.js", "React Query", "TypeScript"],
       github: "#",
@@ -94,9 +97,9 @@ export const portfolioData: PortfolioData = {
         "Telegram bot for anonymous story sharing and mini-games. Users submit short personal stories that go to a private review channel; the community discusses them and awards karma points. Includes several lightweight mini-games (quizzes, word/reaction games) to keep engagement high. I designed the flow, built moderation and anti-spam, and handled basic ops.",
       images: [
         "/images/projects/project-4-1.jpg",
-        "/images/projects/project-4-2.png",
-        "/images/projects/project-4-3.png",
-        "/images/projects/project-4-4.png",
+        // "/images/projects/project-4-2.png",
+        // "/images/projects/project-4-3.png",
+        // "/images/projects/project-4-4.png",
       ],
       technologies: ["JavaScript", "Telegram Bot API", "Node.js"],
       github: "#",
