@@ -2,53 +2,123 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(10, 10, 10, 0.8);
+  /* стекло + мягкий градиент */
+  background:
+    linear-gradient(180deg, rgba(12, 12, 12, 0.85), rgba(12, 12, 12, 0.65)),
+    rgba(10, 10, 10, 0.65);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-color);
+  /* нижнее свечение по краю */
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04), 0 10px 24px rgba(0, 0, 0, 0.25);
 }
 
+/* компактный режим после скролла */
+.scrolled {
+  background:
+    linear-gradient(180deg, rgba(12, 12, 12, 0.92), rgba(12, 12, 12, 0.78)),
+    rgba(10, 10, 10, 0.8);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05),
+    0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+/* Индикатор прокрутки (тонкая линия сверху) */
+.progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+  content: "";
+}
+
+/* Контент */
 .headerContent {
-  max-width: 1280px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 1rem 2rem;
+  padding: 0.75rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+@media (max-width: 767px) {
+  .headerContent {
+    padding: 0.5rem 1.25rem;
+  }
+}
+
+/* Логотип */
 .logo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 700;
   color: var(--text-primary);
   cursor: pointer;
+  background: transparent;
+  border: 0;
+  padding: 0.25rem 0;
+}
+
+.logo:focus-visible {
+  outline: 2px solid var(--accent-purple);
+  outline-offset: 3px;
+  border-radius: 10px;
 }
 
 .logoIcon {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   color: var(--accent-purple);
-  animation: rotate 20s linear infinite;
+  animation: rotate 18s linear infinite;
 }
 
 @keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .logoText {
   background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
+/* Дата/время – аккуратная крошка */
+.dateChip {
+  margin-left: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  line-height: 1;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid color-mix(in oklab, var(--border-color), white 12%);
+  display: none;
+  /* мобильным скрываем */
+}
+
+@media (min-width: 1024px) {
+  .dateChip {
+    display: inline-flex;
+  }
+}
+
+/* Desktop nav */
 .navDesktop {
   display: none;
-  gap: 2rem;
   align-items: center;
+  gap: 0.75rem;
 }
 
 @media (min-width: 768px) {
@@ -58,41 +128,64 @@
 }
 
 .navLink {
-  background: none;
-  border: none;
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
   color: var(--text-secondary);
   font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
   cursor: pointer;
-  padding: 0.5rem 0;
-  position: relative;
-  transition: color 0.2s ease;
+  transition: color .2s ease, border-color .2s ease, background-color .2s ease, transform .15s ease;
 }
 
 .navLink:hover {
   color: var(--text-primary);
+  border-color: color-mix(in oklab, var(--border-color), white 16%);
+  transform: translateY(-1px);
 }
 
-.navLink.active {
-  color: var(--accent-purple);
+.navLink:focus-visible {
+  outline: 2px solid var(--accent-purple);
+  outline-offset: 3px;
 }
 
-.navLink.active::after {
-  content: '';
+.active {
+  color: var(--text-primary);
+  border-color: color-mix(in oklab, var(--accent-purple), white 18%);
+  background: rgba(139, 92, 246, 0.08);
+}
+
+/* Подчёркивание — мягкая градиентная линия снизу у каждой кнопки */
+.navUnderline {
+  pointer-events: none;
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  left: 10%;
+  right: 10%;
+  bottom: -8px;
   height: 2px;
+  border-radius: 2px;
   background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+  opacity: 0;
+  transform: scaleX(0.6);
+  transition: opacity .2s ease, transform .2s ease;
 }
 
+.navLink:hover .navUnderline,
+.active .navUnderline {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* Mobile */
 .mobileMenuBtn {
-  display: flex;
+  display: inline-flex;
   background: none;
   border: none;
   color: var(--text-primary);
   cursor: pointer;
-  padding: 0.5rem;
+  padding: 0.4rem;
 }
 
 @media (min-width: 768px) {
@@ -104,24 +197,33 @@
 .navMobile {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  padding: 1rem 2rem;
+  gap: 0.25rem;
+  padding: 0.5rem 1.25rem 1rem;
   border-top: 1px solid var(--border-color);
   overflow: hidden;
+  background: rgba(10, 10, 10, 0.75);
+  backdrop-filter: blur(10px);
 }
 
 .navLinkMobile {
   background: none;
   border: none;
+  text-align: left;
   color: var(--text-secondary);
   font-size: 1rem;
   cursor: pointer;
-  padding: 0.75rem 0;
-  text-align: left;
-  transition: color 0.2s ease;
+  padding: 0.9rem 0.25rem;
+  border-radius: 10px;
+  transition: background-color .2s ease, color .2s ease, transform .15s ease;
 }
 
 .navLinkMobile:hover,
 .navLinkMobile.active {
-  color: var(--accent-purple);
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.navLinkMobile:focus-visible {
+  outline: 2px solid var(--accent-purple);
+  outline-offset: 3px;
 }

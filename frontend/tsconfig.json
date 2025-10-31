@@ -15,11 +15,10 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+
+
+    /* Можно временно приглушить предупреждение до миграции на TS7 */
+    "ignoreDeprecations": "6.0"
   },
   "include": ["src"]
 }

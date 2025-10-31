@@ -23,7 +23,7 @@ export interface Project {
   technologies: string[];
   github: string;
   live: string;
-  status: 'completed' | 'in-progress' | 'in-development';
+  status: "completed" | "in-progress" | "in-development";
 }
 
 export interface Experience {
@@ -32,7 +32,7 @@ export interface Experience {
   organization: string;
   period: string;
   description: string;
-  type: string;
+  type?: string;
 }
 
 export interface Social {

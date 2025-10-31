@@ -1,8 +1,8 @@
-import { motion } from 'framer-motion';
-import { ChevronRight, Sparkles } from 'lucide-react';
-import { TypeAnimation } from 'react-type-animation';
-import { PersonalInfo } from '@/types';
-import styles from './HeroSection.module.css';
+import { motion } from "framer-motion";
+import { ChevronRight, Sparkles } from "lucide-react";
+import { TypeAnimation } from "react-type-animation";
+import { PersonalInfo } from "../../types";
+import styles from "./HeroSection.module.css";
 
 interface HeroProps {
   data: PersonalInfo;
@@ -13,25 +13,33 @@ export const HeroSection = ({ data, onNavigate }: HeroProps) => {
   return (
     <section id="home" className={styles.hero}>
       <div className={styles.gradientBg}></div>
-      
+
       <div className={styles.particles}>
         {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
             className={styles.particle}
-            initial={{ 
-              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1920),
-              y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1080),
-              scale: Math.random() * 0.5 + 0.5
+            initial={{
+              x:
+                Math.random() *
+                (typeof window !== "undefined" ? window.innerWidth : 1920),
+              y:
+                Math.random() *
+                (typeof window !== "undefined" ? window.innerHeight : 1080),
+              scale: Math.random() * 0.5 + 0.5,
             }}
             animate={{
-              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1920),
-              y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1080),
+              x:
+                Math.random() *
+                (typeof window !== "undefined" ? window.innerWidth : 1920),
+              y:
+                Math.random() *
+                (typeof window !== "undefined" ? window.innerHeight : 1080),
               transition: {
                 duration: Math.random() * 10 + 20,
                 repeat: Infinity,
-                ease: 'linear'
-              }
+                ease: "linear",
+              },
             }}
           />
         ))}
@@ -47,13 +55,18 @@ export const HeroSection = ({ data, onNavigate }: HeroProps) => {
           className={styles.avatar}
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
-          transition={{ type: 'spring', stiffness: 260, damping: 20, delay: 0.2 }}
+          transition={{
+            type: "spring",
+            stiffness: 260,
+            damping: 20,
+            delay: 0.2,
+          }}
           whileHover={{ scale: 1.1, rotateY: 15, rotateX: 15 }}
         >
           <motion.div
             className={styles.avatarGlow}
             animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           />
           <img src={data.avatar} alt={data.name} />
         </motion.div>
@@ -67,7 +80,7 @@ export const HeroSection = ({ data, onNavigate }: HeroProps) => {
           {data.name}
           <motion.span
             animate={{ rotate: [0, 360], scale: [1, 1.2, 1] }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           >
             <Sparkles className={styles.sparkle} />
           </motion.span>
@@ -81,10 +94,14 @@ export const HeroSection = ({ data, onNavigate }: HeroProps) => {
           <div className={styles.subtitle}>
             <TypeAnimation
               sequence={[
-                'Frontend Developer', 2000,
-                'React Specialist', 2000,
-                'Team Leader', 2000,
-                'UI/UX Enthusiast', 2000,
+                "Frontend Developer",
+                2000,
+                "React Specialist",
+                2000,
+                "Team Leader",
+                2000,
+                "UI/UX Enthusiast",
+                2000,
               ]}
               wrapper="span"
               speed={50}
@@ -112,17 +129,17 @@ export const HeroSection = ({ data, onNavigate }: HeroProps) => {
         >
           <motion.button
             className={styles.btnPrimary}
-            onClick={() => onNavigate('projects')}
+            onClick={() => onNavigate("projects")}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             View Projects
             <ChevronRight className={styles.btnIcon} />
           </motion.button>
-          
+
           <motion.button
             className={styles.btnSecondary}
-            onClick={() => onNavigate('contact')}
+            onClick={() => onNavigate("contact")}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -138,7 +155,7 @@ export const HeroSection = ({ data, onNavigate }: HeroProps) => {
         >
           <motion.div
             animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           >
             ↓
           </motion.div>

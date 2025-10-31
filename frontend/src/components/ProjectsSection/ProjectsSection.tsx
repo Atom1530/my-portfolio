@@ -1,65 +1,55 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
-import { portfolioData } from '../../data';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import styles from './ProjectsSection.module.css';
+import { useState, useEffect } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+import { portfolioData } from "../../data";
+import "swiper/css";
+import "swiper/css/pagination";
+import styles from "./ProjectsSection.module.css";
 
-// Normalization functions
-const BASE_URL = window.location.origin;
-const FALLBACK_IMAGE = `${BASE_URL}/images/projects/placeholder.png`;
+// относительный путь ок для CRA/Vite
+const FALLBACK_IMAGE = "/images/projects/placeholder.png";
+
+const isNonEmpty = (v?: string) => Boolean(v && v.trim() && v.trim() !== "#");
 
 const normalizeImages = (project: any) => {
-  if (!project.images || !Array.isArray(project.images) || project.images.length === 0) {
+  if (!Array.isArray(project?.images) || project.images.length === 0) {
     return [FALLBACK_IMAGE];
   }
-  return project.images.filter((img: string) => img && img.trim());
+  const imgs = project.images.filter((img: string) => isNonEmpty(img));
+  return imgs.length ? imgs : [FALLBACK_IMAGE];
 };
 
-const normalizeTechs = (project: any) => {
-  if (!project.technologies || !Array.isArray(project.technologies)) {
-    return [];
-  }
-  return project.technologies.filter((tech: string) => tech && tech.trim());
-};
+const normalizeTechs = (project: any) =>
+  Array.isArray(project?.technologies)
+    ? project.technologies.filter((t: string) => isNonEmpty(t))
+    : [];
 
 const normalizeStatus = (status: string) => {
-  const statusMap: { [key: string]: { label: string; emoji: string } } = {
-    'completed': { label: 'Completed', emoji: '✓' },
-    'in-progress': { label: 'In Progress', emoji: '⚙' },
-    'in-development': { label: 'In Dev', emoji: '🔨' },
+  const map: Record<string, { label: string; emoji: string }> = {
+    completed: { label: "Completed", emoji: "✓" },
+    "in-progress": { label: "In Progress", emoji: "⚙" },
+    "in-development": { label: "In Dev", emoji: "🔨" },
   };
-  return statusMap[status] || { label: 'Unknown', emoji: '?' };
+  return map[status] || { label: "Unknown", emoji: "?" };
 };
 
 export const ProjectsSection = () => {
   const [mounted, setMounted] = useState(false);
+  const reduce = useReducedMotion();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  useEffect(() => setMounted(true), []);
 
   return (
     <section id="projects" className={styles.section}>
-      <div className="section-container">
-        <div className="section-header">
-          <svg
-            className="section-icon"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-            />
-          </svg>
-          <h2 className="section-title">Projects</h2>
+      {/* ambient background layers */}
+      <div className={styles.backdrop} />
+      <div className={styles.beams} />
+      <div className={styles.noise} />
+
+      <div className={styles.container}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>Projects</h2>
         </div>
 
         <div className={styles.grid}>
@@ -73,84 +63,89 @@ export const ProjectsSection = () => {
               <motion.div
                 key={project.id}
                 className={styles.card}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
+                initial={reduce ? false : { opacity: 0, y: 40 }}
+                whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                {/* Status badge */}
+                {/* status */}
                 <div className={styles.status}>
                   <span className={styles.statusBadge}>
                     {status.emoji} {status.label}
                   </span>
                 </div>
 
-                {/* Image slider */}
+                {/* media */}
                 <div className={styles.imageContainer}>
                   {mounted && (
                     <Swiper
                       modules={[Autoplay, Pagination]}
                       slidesPerView={1}
                       loop={hasMultipleImages}
-                      pagination={hasMultipleImages ? { clickable: true } : false}
-                      autoplay={hasMultipleImages ? { delay: 3000, disableOnInteraction: false } : false}
+                      pagination={
+                        hasMultipleImages ? { clickable: true } : false
+                      }
+                      autoplay={
+                        hasMultipleImages && !reduce
+                          ? { delay: 3000, disableOnInteraction: false }
+                          : false
+                      }
                       className={styles.swiper}
                     >
-                      {images.map((image, imgIndex) => (
-                        <SwiperSlide key={imgIndex}>
+                      {images.map((image: string, i: number) => (
+                        <SwiperSlide key={i}>
                           <img
                             src={image}
-                            alt={`${project.title} ${imgIndex + 1}`}
+                            alt={`${project.title} ${i + 1}`}
                             className={styles.image}
                             loading="lazy"
                           />
+                          <div className={styles.imageOverlay} />
                         </SwiperSlide>
                       ))}
                     </Swiper>
                   )}
                 </div>
 
-                {/* Card content */}
-                <div className={`${styles.cardHeader} card-header`}>
+                {/* body */}
+                <div className={styles.cardHeader}>
                   <h3 className={styles.title}>{project.title}</h3>
                 </div>
 
-                <div className={`${styles.cardContent} card-content`}>
+                <div className={styles.cardContent}>
                   <p className={styles.description}>{project.description}</p>
 
-                  {/* Technologies */}
-                  {techs.length > 0 && (
+                  {!!techs.length && (
                     <div className={styles.techList}>
-                      {techs.map((tech, techIndex) => (
-                        <span key={techIndex} className={styles.techBadge}>
-                          {tech}
+                      {techs.map((t: string) => (
+                        <span key={t} className={styles.techBadge}>
+                          {t}
                         </span>
                       ))}
                     </div>
                   )}
 
-                  {/* Action buttons */}
                   <div className={styles.actions}>
-                    {project.github && project.github !== '#' && (
+                    {project.github && project.github !== "#" && (
                       <a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={styles.button}
+                        className={`${styles.button} ${styles.githubButton}`}
                         aria-label={`View ${project.title} on GitHub`}
                       >
                         <svg
                           className={styles.icon16}
-                          fill="currentColor"
                           viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
+                          aria-hidden="true"
                         >
-                          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.44 9.8 8.21 11.39.6.11.79-.26.79-.58v-2.23c-3.34.73-4.03-1.42-4.03-1.42-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.49 1 .11-.78.42-1.31.76-1.6-2.66-.31-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.53-1.52.12-3.18 0 0 1.01-.32 3.3 1.23.96-.27 1.98-.4 3-.4s2.04.13 3 .4c2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.48 5.92.43.37.83 1.1.83 2.22v3.29c0 .32.19.69.8.58C20.56 21.8 24 17.31 24 12 24 5.37 18.63 0 12 0Z" />
                         </svg>
                         GitHub
                       </a>
                     )}
-                    {project.live && project.live !== '#' && (
+
+                    {project.live && project.live !== "#" && (
                       <a
                         href={project.live}
                         target="_blank"
@@ -160,16 +155,16 @@ export const ProjectsSection = () => {
                       >
                         <svg
                           className={styles.icon16}
+                          viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
+                          aria-hidden="true"
                         >
                           <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
                             strokeWidth={2}
-                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                            d="M10 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4M14 4h6m0 0v6m0-6L10 14"
                           />
                         </svg>
                         Live Demo
