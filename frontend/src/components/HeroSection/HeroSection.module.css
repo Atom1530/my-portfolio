@@ -41,7 +41,7 @@
   position: absolute;
   width: 4px;
   height: 4px;
-  background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+  background: linear-gradient(135deg, var(--text-primary), var(--accent-blue));
   border-radius: 50%;
   opacity: 0.6;
   filter: blur(1px);
@@ -59,7 +59,7 @@
   height: 120px;
   margin: 0 auto 2rem;
   border-radius: 50%;
-  border: 3px solid var(--accent-purple);
+  border: 3px solid var(--accent-blue);
   padding: 4px;
   background: var(--bg-secondary);
   position: relative;
@@ -71,10 +71,10 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-40%, -50%);
   width: 140px;
   height: 140px;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent 70%);
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent 65%);
   border-radius: 50%;
   z-index: -1;
 }
@@ -93,7 +93,7 @@
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
   margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+  background: linear-gradient(135deg, var(--text-primary), rgba(205, 203, 229, 0.986));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -107,7 +107,7 @@
 .sparkle {
   width: 32px;
   height: 32px;
-  color: var(--accent-purple);
+  color: var(--text-primary);
   filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.5));
 }
 

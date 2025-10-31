@@ -9,7 +9,7 @@ export const portfolioData: PortfolioData = {
     email: "samirsharif6969@gmail.com",
     phone: "+1 (470) 861-4937",
     location: "GA Atlanta",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Samir",
+    avatar: "/images/avatar/samir-sharif.jpg",
   },
 
   skills: [
@@ -34,10 +34,9 @@ export const portfolioData: PortfolioData = {
       description:
         "Team project where I served as Team Lead. A modern, responsive website showcasing technical solutions and services. Led a team through the full development lifecycle.",
       images: [
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop",
-        "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=500&fit=crop",
-        "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=800&h=500&fit=crop",
-        "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=500&fit=crop",
+        "/images/projects/project-1-1.png",
+        "/images/projects/project-1-2.png",
+        "/images/projects/project-1-3.png",
       ],
       technologies: ["HTML5", "CSS3", "JavaScript", "Team Lead"],
       github: "https://github.com/Atom1530/ForceTech7-Website2",
@@ -50,11 +49,11 @@ export const portfolioData: PortfolioData = {
       description:
         "Interactive fishing game built with Phaser 3. Features core gameplay loop: cast → tension meter → catch/fail mechanics. Planned features include shop system and multiple fishing locations.",
       images: [
-        "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=500&fit=crop",
-        "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&h=500&fit=crop",
-        "https://images.unsplash.com/photo-1535083783855-76ae62b2914e?w=800&h=500&fit=crop",
-        "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=500&fit=crop",
-        "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=500&fit=crop",
+        "/images/projects/project-2-1.png",
+        "/images/projects/project-2-2.png",
+        "/images/projects/project-2-3.png",
+        "/images/projects/project-2-4.png",
+        "/images/projects/project-2-5.png",
       ],
       technologies: ["Phaser 3", "JavaScript", "Game Dev"],
       github: "#",
