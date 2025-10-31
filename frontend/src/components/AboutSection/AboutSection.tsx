@@ -9,25 +9,28 @@ interface AboutProps {
 
 export const AboutSection = ({ data }: AboutProps) => {
   return (
-    <section id="about" className={styles.about}>
-      {/* ambient + fade, как в Hero/Projects */}
-      <div className={styles.fadeTop} />
-      <div className={styles.backdrop} />
-      <div className={styles.beams} />
-      <div className={styles.noise} />
+    <section id="about" className={styles.about} aria-labelledby="about-title">
+      {/* ambient + fade — в едином стиле с Hero/Contact */}
+      <div className={styles.fadeTop} aria-hidden="true" />
+      <div className={styles.gradientBg} aria-hidden="true" />
+      <div className={styles.beams} aria-hidden="true" />
+      <div className={styles.noise} aria-hidden="true" />
 
       <div className={styles.container}>
         <div className={styles.sectionHeader}>
           <User className={styles.sectionIcon} />
-          <h2 className={styles.sectionTitle}>About Me</h2>
+          <h2 id="about-title" className={styles.sectionTitle}>
+            About Me
+          </h2>
         </div>
 
         <div className={styles.grid}>
           <motion.div
+            className={styles.card}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className={styles.card}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5 }}
           >
             <div className={styles.cardHeader}>
               <Zap className={styles.icon} />
@@ -43,11 +46,11 @@ export const AboutSection = ({ data }: AboutProps) => {
           </motion.div>
 
           <motion.div
+            className={styles.card}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.15 }}
-            className={styles.card}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5, delay: 0.12 }}
           >
             <div className={styles.cardHeader}>
               <Code2 className={styles.icon} />

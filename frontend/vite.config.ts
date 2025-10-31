@@ -1,21 +1,13 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import path from 'path'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-    },
+    alias: { "@": "/src" },
   },
+  base: "/Atom1530/",
   server: {
     port: 3000,
-    host: '0.0.0.0',
-    allowedHosts: [
-      'samir-portfolio.preview.emergentagent.com',
-      '.emergentagent.com',
-      'localhost',
-    ],
   },
-})
+});

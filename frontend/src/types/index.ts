@@ -2,6 +2,8 @@ export interface PersonalInfo {
   name: string;
   title: string;
   subtitle: string;
+  roles?: string[];
+  typingDelayMs?: number;
   bio: string;
   email: string;
   avatar: string;

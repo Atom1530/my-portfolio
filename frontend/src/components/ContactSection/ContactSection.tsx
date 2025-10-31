@@ -5,38 +5,19 @@ import styles from "./ContactSection.module.css";
 
 const isGood = (v?: string) => Boolean(v && v.trim() && v.trim() !== "#");
 
-type Particle = {
-  id: number;
-  x: number; // vw
-  y: number; // vh
-  size: number;
-  driftX: number;
-  driftY: number;
-  duration: number;
-  delay: number;
-  opacity: number;
+type Seed = {
+  x0: number;
+  y0: number;
+  x1: number;
+  y1: number;
+  x2: number;
+  y2: number;
+  s: number;
+  dur: number;
 };
-
-const makeParticles = (count: number): Particle[] =>
-  Array.from({ length: count }).map((_, i) => {
-    const r = Math.random;
-    const size = 1 + Math.floor(r() * 2); // 1..2px
-    return {
-      id: i,
-      x: Math.floor(r() * 100),
-      y: Math.floor(r() * 100),
-      size,
-      driftX: (r() - 0.5) * 160, // -80..80
-      driftY: (r() - 0.3) * 240, // -72..168
-      duration: 14 + Math.floor(r() * 20), // 14..34s
-      delay: Math.floor(r() * 8), // 0..7
-      opacity: 0.45 + r() * 0.55, // 0.45..1
-    };
-  });
 
 export const ContactSection = () => {
   const reduce = useReducedMotion();
-  const particles = useMemo(() => makeParticles(120), []);
 
   const socials = [
     {
@@ -62,7 +43,7 @@ export const ContactSection = () => {
         <svg className={styles.icon16} aria-hidden="true" viewBox="0 0 24 24">
           <path
             fill="currentColor"
-            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0z"
           />
         </svg>
       ),
@@ -76,12 +57,30 @@ export const ContactSection = () => {
         <svg className={styles.icon16} aria-hidden="true" viewBox="0 0 24 24">
           <path
             fill="currentColor"
-            d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
+            d="M23.953 4.57a10 10 0 0 1-2.825.775 4.958 4.958 0 0 0 2.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 0 0-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 0 0-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 0 1-2.228-.616v.06a4.923 4.923 0 0 0 3.946 4.827 4.996 4.996 0 0 1-2.212.085 4.936 4.936 0 0 0 4.604 3.417 9.867 9.867 0 0 1-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 0 0 7.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0 0 24 4.59z"
           />
         </svg>
       ),
     },
   ].filter((s) => isGood(s.href));
+
+  const W = typeof window !== "undefined" ? window.innerWidth : 1920;
+  const H = typeof window !== "undefined" ? window.innerHeight : 1080;
+
+  // генерим сиды один раз
+  const seeds = useMemo<Seed[]>(() => {
+    const n = reduce ? 40 : 20;
+    return Array.from({ length: n }).map(() => ({
+      x0: Math.random() * W,
+      y0: Math.random() * H,
+      x1: Math.random() * W,
+      y1: Math.random() * H,
+      x2: Math.random() * W,
+      y2: Math.random() * H,
+      s: Math.random() * 0.5 + 0.5,
+      dur: Math.random() * 15 + 25, // 20..30s
+    }));
+  }, [reduce, W, H]);
 
   return (
     <section
@@ -89,38 +88,27 @@ export const ContactSection = () => {
       className={styles.section}
       aria-labelledby="contact-title"
     >
-      {/* безшовная «крышка» + top-fade как в About/Hero */}
-      <div className={styles.fadeTop} />
-
-      {/* Animated gradient background (как в Hero) */}
       <div className={styles.gradientBg} aria-hidden="true" />
 
-      {/* Star field (движущиеся частицы) */}
+      {/* Звёзды */}
       <div className={styles.particles} aria-hidden="true">
-        {(!reduce ? particles : particles.slice(0, 40)).map((p) => (
+        {seeds.map((p, i) => (
           <motion.span
-            key={p.id}
+            key={i}
             className={styles.particle}
-            style={{
-              left: `${p.x}vw`,
-              top: `${p.y}vh`,
-              width: p.size,
-              height: p.size,
-              opacity: p.opacity,
+            initial={{ x: p.x0, y: p.y0, scale: p.s, opacity: 0.6 }}
+            animate={{
+              x: [p.x0, p.x1, p.x2],
+              y: [p.y0, p.y1, p.y2],
+              opacity: [0.6, 1, 0.6],
             }}
-            initial={{ x: 0, y: 0 }}
-            animate={reduce ? undefined : { x: p.driftX, y: p.driftY }}
-            transition={
-              reduce
-                ? undefined
-                : {
-                    duration: p.duration,
-                    delay: p.delay,
-                    repeat: Infinity,
-                    repeatType: "mirror",
-                    ease: "linear",
-                  }
-            }
+            transition={{
+              duration: p.dur,
+              times: [0, 0.5, 1],
+              repeat: Infinity,
+              repeatType: "mirror",
+              ease: "linear",
+            }}
           />
         ))}
       </div>

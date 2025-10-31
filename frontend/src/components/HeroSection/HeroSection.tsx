@@ -3,6 +3,7 @@ import { ChevronRight, Sparkles } from "lucide-react";
 import { TypeAnimation } from "react-type-animation";
 import { PersonalInfo } from "../../types";
 import styles from "./HeroSection.module.css";
+import { useMemo } from "react";
 
 interface HeroProps {
   data: PersonalInfo;
@@ -10,6 +11,19 @@ interface HeroProps {
 }
 
 export const HeroSection = ({ data, onNavigate }: HeroProps) => {
+  const roles = useMemo(() => {
+    if (data.roles && data.roles.length > 0) return data.roles;
+    const fromSubtitle = data.subtitle
+      ? data.subtitle.split("|").map((s) => s.trim())
+      : [];
+    return [data.title, ...fromSubtitle].filter(Boolean);
+  }, [data.roles, data.subtitle, data.title]);
+
+  const sequence = useMemo<(string | number)[]>(() => {
+    const delay = data.typingDelayMs ?? 2000;
+    return roles.flatMap((role) => [role, delay]);
+  }, [roles, data.typingDelayMs]);
+
   return (
     <section id="home" className={styles.hero}>
       <div className={styles.gradientBg}></div>
@@ -91,18 +105,9 @@ export const HeroSection = ({ data, onNavigate }: HeroProps) => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.6, duration: 0.6 }}
         >
-          <div className={styles.subtitle}>
+          <div className={styles.subtitle} aria-live="polite">
             <TypeAnimation
-              sequence={[
-                "Frontend Developer",
-                2000,
-                "React Specialist",
-                2000,
-                "Team Leader",
-                2000,
-                "UI/UX Enthusiast",
-                2000,
-              ]}
+              sequence={sequence}
               wrapper="span"
               speed={50}
               repeat={Infinity}

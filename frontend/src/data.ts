@@ -5,7 +5,16 @@ export const portfolioData: PortfolioData = {
     name: "Samir Sharif",
     title: "Frontend Developer",
     subtitle: "JavaScript | React | Next.js | TypeScript | GoIT Student",
-    bio: "Frontend developer focused on React/Next.js. Led three GoIT project teams. Currently building a Phaser-based fishing game. I care about clean architecture, accessible UI, and shipping features that matter.",
+    roles: [
+      "Frontend Developer (React/Next.js)",
+      "TypeScript Advocate",
+      "Game Developer",
+      "Team Lead",
+      "UI/UX & Motion",
+      "Performance & Accessibility",
+    ],
+    typingDelayMs: 2000, //для задержки
+    bio: "Frontend developer focused on React/Next.js. Team lead on three GoIT projects—sprint planning, task allocation, code reviews, and delivery oversight. I also maintain a small Phaser side project to improve my logic and UI skills.",
     email: "samirsharif6969@gmail.com",
     phone: "+1 (470) 861-4937",
     location: "GA Atlanta",
@@ -32,7 +41,7 @@ export const portfolioData: PortfolioData = {
       id: 1,
       title: "ArtistHub",
       description:
-        "Team project where I served as Team Lead. A modern, responsive website showcasing technical solutions and services. Led a team through the full development lifecycle.",
+        "ArtistHub helps you find new artists and listen without leaving the site. Each track links to YouTube but plays inline via an embedded player. The project includes an artist list, per-artist pages, and a fully responsive UI.",
       images: [
         "/images/projects/project-1-1.png",
         "/images/projects/project-1-2.png",
@@ -47,7 +56,7 @@ export const portfolioData: PortfolioData = {
       id: 2,
       title: "Fishing Game",
       description:
-        "Interactive fishing game built with Phaser 3. Features core gameplay loop: cast → tension meter → catch/fail mechanics. Planned features include shop system and multiple fishing locations.",
+        "A Phaser 3 fishing game with a full progression loop: cast → control tension → land the catch → sell → upgrade. Quests guide early goals, tournaments push skill checks, and new locations unlock with better rods, lines, and lures. Features in-game shop, readable HUD, and responsive UI.",
       images: [
         "/images/projects/project-2-1.png",
         "/images/projects/project-2-2.png",
@@ -63,8 +72,10 @@ export const portfolioData: PortfolioData = {
     {
       id: 3,
       title: "NoteHub",
+
       description:
-        "Modern note-taking application with full CRUD functionality. Built with Next.js and React Query for optimal performance. Features include tagging, search, and intuitive note management.",
+        "A clean note-taking app for ideas, tasks, and quick drafts. Create, edit, and delete notes; tag them for context and find anything fast with search.",
+
       images: [
         "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=500&fit=crop",
         "https://images.unsplash.com/photo-1512758017271-d7b84c2113f1?w=800&h=500&fit=crop",
@@ -75,6 +86,22 @@ export const portfolioData: PortfolioData = {
       github: "#",
       live: "#",
       status: "in-development",
+    },
+    {
+      id: 4,
+      title: "AnonStories Telegram Bot",
+      description:
+        "Telegram bot for anonymous story sharing and mini-games. Users submit short personal stories that go to a private review channel; the community discusses them and awards karma points. Includes several lightweight mini-games (quizzes, word/reaction games) to keep engagement high. I designed the flow, built moderation and anti-spam, and handled basic ops.",
+      images: [
+        "/images/projects/project-4-1.jpg",
+        "/images/projects/project-4-2.png",
+        "/images/projects/project-4-3.png",
+        "/images/projects/project-4-4.png",
+      ],
+      technologies: ["JavaScript", "Telegram Bot API", "Node.js"],
+      github: "#",
+      live: "#",
+      status: "in-progress",
     },
   ],
 
@@ -94,6 +121,14 @@ export const portfolioData: PortfolioData = {
       period: "2025 - Present",
       description:
         "Intensive full-stack development program focusing on modern JavaScript, React, and web technologies. Completed multiple real-world projects with emphasis on best practices.",
+    },
+    {
+      id: 3,
+      title: "Creator — Telegram Bot with Mini-Games",
+      organization: "Independent",
+      period: "2024 – Present",
+      description:
+        "Built and maintained a Telegram bot that lets users share stories anonymously to a private channel, where the community discusses them and awards karma. Implemented moderation queue, rate-limits/anti-spam, and a set of mini-games to boost engagement. Responsibilities: product flow, bot logic, lightweight data storage, and day-to-day ops.",
     },
   ],
 
